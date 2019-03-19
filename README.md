@@ -10,9 +10,9 @@ There's also the directory 'offline-apps/' and the install_apps.sh script runs t
 
 # Steps
 
-sh apply_os_settings.sh
-reboot
-sh install_apps.sh
-reboot
-sh apply_app_settings.sh
-reboot
+- sh apply_os_settings.sh
+- reboot
+- sh install_apps.sh
+- reboot
+- sh apply_app_settings.sh
+- reboot
