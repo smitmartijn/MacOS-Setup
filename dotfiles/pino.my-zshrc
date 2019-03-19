@@ -1,0 +1,19 @@
+# Load extensions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Activate plugins
+plugins=(git zsh-completions)
+
+# Custom paths
+PATH=/usr/local/sbin:$PATH
+
+# Custom vars
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Set default editor
+export EDITOR='nano'
+
+# Theme 
+ZSH_THEME="fishy"
