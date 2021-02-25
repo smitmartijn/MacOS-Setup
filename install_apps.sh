@@ -11,39 +11,61 @@ fi
 printf "Updating brew\n"
 brew upgrade && brew update
 
+brew install mas            # Apple store cli
+
+printf "AppStore: Installing Xcode\n"
+mas install 497799835
+
 printf "Installing xcode cli utils\n"
 xcode-select --install
 
 printf "brew: Installing cli packages\n"
 brew install git
 brew install gpg
-brew install mas            # Apple store cli
 brew install node           # NodeJS dev
 brew install openssl        # Generate certificates
-brew install ruby-install 
+brew install ruby-install
 brew install terraform      # Automation
 brew install vim            # Guilty pleasure
 brew install watch
-brew install wakeonlan      
+brew install wakeonlan
 brew install wget
 
 # Install ZSH and Oh My ZSH
-brew install zsh zsh-completions zsh-autosuggestions zsh-syntax-highlighting 
+brew install zsh zsh-completions zsh-autosuggestions zsh-syntax-highlighting
 
 chsh -s /usr/local/bin/zsh
 /usr/local/bin/zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
+brew install romkatv/powerlevel10k/powerlevel10k
+echo "source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme" >>~/.zshrc
+
+wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+sudo cp *.ttf /Library/Fonts/
+
+
 printf "brew: Installing apps\n"
 brew cask install 1password
 brew cask install 1password-cli
+brew install --cask adguard
+brew install --cask alfred
 brew cask install bartender
+brew install --cask brave-browser
+brew install --cask camtasia
+brew install --cask cyberduck
 brew cask install dropbox
+brew install --cask discord
 brew cask install docker
 brew cask install evernote
 brew cask install firefox
+brew install flux
 brew cask install franz
+brew install --cask gimp
 brew cask install google-chrome
 brew cask install grammarly
 brew cask install handbrake
@@ -53,9 +75,12 @@ brew cask install java
 brew cask install keybase
 brew cask install ngrok
 brew cask install nordvpn
+brew install --cask notion
+brew install --cask packages
 brew cask install postman
 brew cask install powershell
 brew cask install slack
+brew install --cask snagit
 brew cask install spotify
 brew cask install tor-browser
 brew cask install tuxera-ntfs
@@ -80,50 +105,51 @@ if ! command -v mas > /dev/null; then
 fi
 
 printf "AppStore: Installing The Unarchiver\n"
-mas install 425424353  
+mas install 425424353
 
 printf "AppStore: Installing Todoist\n"
-mas install 585829637  
+mas install 585829637
 
 printf "AppStore: Installing Tweetbot 3\n"
 mas install 1384080005
 
+printf "AppStore: Installing Magnet\n"
+mas install 441258766
+
 printf "AppStore: Installing Microsoft Remote Desktop 10\n"
-mas install 1295203466  
+mas install 1295203466
 
 printf "AppStore: Installing Microsoft OneDrive\n"
-mas install 823766827 
+mas install 823766827
 
 printf "AppStore: Installing Microsoft OneNote\n"
-mas install 784801555 
+mas install 784801555
 
 printf "AppStore: Installing Microsoft Excel\n"
-mas install 462058435 
+mas install 462058435
 
 printf "AppStore: Installing Microsoft Outlook\n"
-mas install 985367838 
+mas install 985367838
 
 printf "AppStore: Installing Microsoft Word\n"
 mas install 462054704
 
 printf "AppStore: Installing Microsoft PowerPoint\n"
-mas install 462062816 
+mas install 462062816
+
+
 
 printf "Installing offline apps..\n"
-for f in offline-apps/*.pkg ; 
+for f in offline-apps/*.pkg ;
   do sudo installer -pkg "$f" -target /
 done
 
 printf "Downloading and installing apps via .dmg links..\n"
 URLs=(
-  https://download.techsmith.com/camtasiamac/releases/Camtasia.dmg
-  https://download.techsmith.com/snagitmac/releases/Snagit.dmg
-  https://download01.logi.com/web/ftp/pub/techsupport/presentation/LogiPresentation_1.52.95.dmg
-  https://jabraxpressonlineprdstor.blob.core.windows.net/jdo/JabraDirectSetup.dmg
-  http://files.whatpulse.org/whatpulse-mac-2.8.4.dmg
+  http://files.whatpulse.org/whatpulse-mac-3.1.dmg
 )
 
-for i in "${URLs[@]}"; 
+for i in "${URLs[@]}";
 do
   wget -P ~/Downloads/ "$i"
   DMG=$(echo $i | rev | cut -d / -f 1 | rev)
